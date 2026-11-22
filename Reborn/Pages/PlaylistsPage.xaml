@@ -1,0 +1,11 @@
+<Page
+    x:Class="Reborn.Pages.PlaylistsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Background="Transparent">
+
+    <StackPanel Padding="22,20,24,0" Spacing="24">
+        <TextBlock Text="Плейлисты" Style="{StaticResource PageHeader}" />
+        <TextBlock Text="Плейлистов пока нет. Их создание появится в следующей версии." FontSize="20" TextWrapping="Wrap" />
+    </StackPanel>
+</Page>

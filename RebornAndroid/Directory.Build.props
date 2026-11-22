@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Local Android SDK (installed by InstallAndroidDependencies); override with -p:AndroidSdkDirectory=... -->
+    <AndroidSdkDirectory Condition="'$(AndroidSdkDirectory)' == '' and Exists('D:\Android\sdk')">D:\Android\sdk</AndroidSdkDirectory>
+
+    <!--
+      NU1507: multiple package sources with CPM
+      NETSDK1201: RID does not create a self-contained app
+      PRI257: default language not among resources
+    -->
+    <NoWarn>$(NoWarn);NU1507;NETSDK1201;PRI257;CA1416;CA1422;XA4211</NoWarn>
+  </PropertyGroup>
+</Project>

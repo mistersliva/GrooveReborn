@@ -1,0 +1,73 @@
+<Page
+    x:Class="Reborn.Pages.RecentPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:m="using:Reborn.Models"
+    Background="Transparent">
+
+    <Grid Padding="22,20,24,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Последние" Style="{StaticResource PageHeader}" />
+
+        <Button Grid.Row="1" Style="{StaticResource LinkButton}" Margin="0,4,0,0" HorizontalAlignment="Left"
+                Click="ShuffleAll_Click" AutomationProperties.Name="ShuffleAll">
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <FontIcon Glyph="&#xE8B1;" FontSize="14" />
+                <TextBlock Text="Перемешать всю музыку" FontSize="14" />
+            </StackPanel>
+        </Button>
+
+        <StackPanel x:Name="EmptyState" Grid.Row="2" Margin="0,24,0,0" Spacing="18">
+            <TextBlock Text="Здесь будет показано то, что вы слушаете." FontSize="20" TextWrapping="Wrap" />
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <FontIcon Glyph="&#xE93C;" FontSize="24" VerticalAlignment="Top" Margin="2,2,0,0" />
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="Воспроизвести свою музыку" FontSize="14" />
+                    <Button Style="{StaticResource LinkButton}" Padding="0,1" Foreground="{StaticResource GrooveAccentText}"
+                            Click="ShowMyMusic_Click">
+                        <TextBlock Text="Показать мою музыку" FontSize="14" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+
+        <GridView x:Name="AlbumsGrid" Grid.Row="2" Padding="0,20,0,24" Margin="-4,0,0,0"
+                  SelectionMode="None" IsItemClickEnabled="True" ItemClick="Album_Click">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="m:Album">
+                    <Grid Width="180" Margin="4,4,8,16"
+                          PointerEntered="Tile_PointerEntered" PointerExited="Tile_PointerExited">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="180" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Background="{ThemeResource TilePlaceholder}">
+                            <FontIcon Glyph="&#xE93C;" FontSize="56" Opacity="0.4" />
+                            <Image Source="{x:Bind Cover}" Stretch="UniformToFill" />
+                            <Border x:Name="HoverShade" Background="#33000000" Visibility="Collapsed" />
+                            <Button x:Name="PlayOverlay" Visibility="Collapsed" Width="40" Height="40" CornerRadius="20"
+                                    Style="{StaticResource BareButton}" Margin="0,0,10,10"
+                                    HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                    Background="#99000000" BorderBrush="White" BorderThickness="1"
+                                    Click="PlayAlbum_Click" AutomationProperties.Name="Воспроизвести">
+                                <FontIcon Glyph="&#xE768;" FontSize="14" Foreground="White" Margin="2,0,0,0" />
+                            </Button>
+                        </Grid>
+                        <TextBlock Grid.Row="1" Text="{x:Bind Title}" FontSize="15" Margin="0,8,0,0" TextTrimming="CharacterEllipsis" />
+                        <TextBlock Grid.Row="2" Text="{x:Bind Artist}" Style="{StaticResource SecondaryText}" FontSize="13" />
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>

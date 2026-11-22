@@ -1,0 +1,269 @@
+<UserControl
+    x:Class="Reborn.Shell"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="using:Reborn.Controls">
+
+    <!-- Groove 10 layout adapted to a phone: the 320px pane becomes a slide-in drawer (hamburger),
+         content stays black, the accent-tinted player bar sits at the bottom across the full width.
+         On wide screens (tablets, landscape) the pane is docked and the player bar uses the desktop layout. -->
+    <Grid x:Name="Root" Background="{ThemeResource ContentBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <SplitView x:Name="Split" DisplayMode="Overlay" OpenPaneLength="320" IsPaneOpen="False"
+                   PaneBackground="{StaticResource PaneBrush}" LightDismissOverlayMode="On">
+            <SplitView.Pane>
+                <Grid x:Name="Pane">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Button x:Name="PaneHamburger" Style="{StaticResource IconButton}" HorizontalAlignment="Left"
+                            Click="Hamburger_Click" AutomationProperties.Name="Меню">
+                        <FontIcon Glyph="&#xE700;" FontSize="20" />
+                    </Button>
+
+                    <!-- Search box: dark field, magnifier on the right -->
+                    <Grid x:Name="SearchField" Grid.Row="1" Height="40" Margin="12,3,13,8"
+                          Background="{ThemeResource SearchBoxBackground}" BorderThickness="2" BorderBrush="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="SearchBox" PlaceholderText="Поиск" FontSize="15" Padding="10,7,4,0"
+                                 VerticalAlignment="Center" BorderThickness="0" Background="Transparent"
+                                 KeyDown="Search_KeyDown" GotFocus="Search_GotFocus" LostFocus="Search_LostFocus" />
+                        <Button Grid.Column="1" Style="{StaticResource BareButton}" Click="SearchButton_Click"
+                                AutomationProperties.Name="Найти">
+                            <FontIcon Glyph="&#xE721;" FontSize="16" />
+                        </Button>
+                    </Grid>
+
+                    <StackPanel Grid.Row="2">
+                        <Button x:Name="NavMusic" Style="{StaticResource PaneItem}" Tag="music" Click="Nav_Click"
+                                AutomationProperties.Name="Моя музыка">
+                            <Grid>
+                                <Rectangle x:Name="IndMusic" Width="4" HorizontalAlignment="Left" Margin="0,1"
+                                           Fill="{StaticResource GrooveAccentText}" Visibility="Collapsed" />
+                                <FontIcon Glyph="&#xE8D6;" FontSize="16" Width="48" HorizontalAlignment="Left" />
+                                <TextBlock Text="Моя музыка" Margin="48,0,0,0" VerticalAlignment="Center" FontSize="15" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="NavRecent" Style="{StaticResource PaneItem}" Tag="recent" Click="Nav_Click"
+                                AutomationProperties.Name="Последние">
+                            <Grid>
+                                <Rectangle x:Name="IndRecent" Width="4" HorizontalAlignment="Left" Margin="0,1"
+                                           Fill="{StaticResource GrooveAccentText}" Visibility="Collapsed" />
+                                <FontIcon Glyph="&#xE823;" FontSize="16" Width="48" HorizontalAlignment="Left" />
+                                <TextBlock Text="Последние" Margin="48,0,0,0" VerticalAlignment="Center" FontSize="15" />
+                            </Grid>
+                        </Button>
+                        <Button x:Name="NavNow" Style="{StaticResource PaneItem}" Tag="now" Click="Nav_Click"
+                                AutomationProperties.Name="Сейчас играет">
+                            <Grid>
+                                <Rectangle x:Name="IndNow" Width="4" HorizontalAlignment="Left" Margin="0,1"
+                                           Fill="{StaticResource GrooveAccentText}" Visibility="Collapsed" />
+                                <FontIcon Glyph="&#xE9E9;" FontSize="16" Width="48" HorizontalAlignment="Left" />
+                                <TextBlock Text="Сейчас играет" Margin="48,0,0,0" VerticalAlignment="Center" FontSize="15" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="4">
+                        <Rectangle Height="1" Margin="12,0,13,0" Fill="{ThemeResource PaneSeparator}" />
+                        <Button x:Name="NavSettings" Style="{StaticResource PaneItem}" Tag="settings" Click="Nav_Click"
+                                AutomationProperties.Name="Настройки">
+                            <Grid>
+                                <Rectangle x:Name="IndSettings" Width="4" HorizontalAlignment="Left" Margin="0,1"
+                                           Fill="{StaticResource GrooveAccentText}" Visibility="Collapsed" />
+                                <FontIcon Glyph="&#xE713;" FontSize="16" Width="48" HorizontalAlignment="Left" />
+                                <TextBlock Text="Настройки" Margin="48,0,0,0" VerticalAlignment="Center" FontSize="15" />
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </SplitView.Pane>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="48" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="TopHamburger" Style="{StaticResource IconButton}" Click="Hamburger_Click"
+                            AutomationProperties.Name="Меню">
+                        <FontIcon Glyph="&#xE700;" FontSize="20" />
+                    </Button>
+                    <Button x:Name="BackButton" Style="{StaticResource IconButton}" Visibility="Collapsed"
+                            Click="Back_Click" AutomationProperties.Name="Назад">
+                        <FontIcon Glyph="&#xE72B;" FontSize="16" />
+                    </Button>
+                    <TextBlock x:Name="TitleText" Text="Reborn Music" FontSize="13" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </StackPanel>
+                <Frame x:Name="ContentFrame" Grid.Row="1" Navigated="ContentFrame_Navigated" />
+            </Grid>
+        </SplitView>
+
+        <!-- Player bar -->
+        <Grid x:Name="PlayerBar" Grid.Row="1" Background="{StaticResource GroovePlayerBar}">
+
+            <!-- Desktop layout (wide): 90px, now-playing left, transport centre, volume right -->
+            <Grid x:Name="WideBar" Height="90" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="WNowInfo" Background="Transparent" Tapped="NowInfo_Tapped">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Background="#33000000">
+                        <FontIcon Glyph="&#xE8D6;" FontSize="28" Opacity="0.5" Foreground="{StaticResource GroovePlayerForeground}" />
+                        <Image x:Name="WCover" Stretch="UniformToFill" />
+                    </Grid>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="16,0,12,4">
+                        <TextBlock x:Name="WTitle" FontSize="15" Foreground="{StaticResource GroovePlayerForeground}" TextTrimming="CharacterEllipsis" />
+                        <TextBlock x:Name="WArtist" FontSize="13" Margin="0,2,0,0" Foreground="{StaticResource GroovePlayerSecondary}" TextTrimming="CharacterEllipsis" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Column="1" Width="436">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="63" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                        <Button x:Name="WShuffle" Style="{StaticResource TransportButton}" Click="Shuffle_Click" AutomationProperties.Name="Перемешать">
+                            <FontIcon x:Name="WShuffleIcon" Glyph="&#xE8B1;" FontSize="16" />
+                        </Button>
+                        <Button x:Name="WPrev" Style="{StaticResource TransportButton}" Click="Prev_Click" AutomationProperties.Name="Назад">
+                            <FontIcon Glyph="&#xE892;" FontSize="21" />
+                        </Button>
+                        <Button x:Name="WPlay" Style="{StaticResource TransportButton}" Width="50" Height="50" CornerRadius="25"
+                                Margin="7,0" BorderThickness="1" BorderBrush="{ThemeResource PlayRing}" Click="Play_Click"
+                                AutomationProperties.Name="Воспроизвести">
+                            <FontIcon x:Name="WPlayIcon" Glyph="&#xE768;" FontSize="26" Margin="3,0,0,0" />
+                        </Button>
+                        <Button x:Name="WNext" Style="{StaticResource TransportButton}" Click="Next_Click" AutomationProperties.Name="Далее">
+                            <FontIcon Glyph="&#xE893;" FontSize="21" />
+                        </Button>
+                        <Button x:Name="WRepeat" Style="{StaticResource TransportButton}" Click="Repeat_Click" AutomationProperties.Name="Повтор">
+                            <FontIcon x:Name="WRepeatIcon" Glyph="&#xE8EE;" FontSize="16" />
+                        </Button>
+                    </StackPanel>
+                    <Grid Grid.Row="1" Height="30" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="48" />
+                            <ColumnDefinition Width="340" />
+                            <ColumnDefinition Width="48" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="WPos" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,0"
+                                   Foreground="{StaticResource GroovePlayerSecondary}" />
+                        <c:GrooveSlider x:Name="WSeek" Grid.Column="1" ThumbOnHoverOnly="True" />
+                        <TextBlock x:Name="WDur" Grid.Column="2" FontSize="12" VerticalAlignment="Center" Margin="8,0,0,0"
+                                   Foreground="{StaticResource GroovePlayerSecondary}" />
+                    </Grid>
+                </Grid>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,14,8,0">
+                    <Button x:Name="WVolumeButton" Style="{StaticResource TransportButton}" Click="Mute_Click" AutomationProperties.Name="Громкость">
+                        <FontIcon x:Name="WVolumeIcon" Glyph="&#xE767;" FontSize="18" />
+                    </Button>
+                    <c:GrooveSlider x:Name="WVolume" Width="100" Height="40" Margin="6,0,4,0" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Phone layout: seek row on top, now-playing and transport below -->
+            <Grid x:Name="NarrowBar">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="36" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+
+                <Grid Padding="0,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="44" />
+                        <ColumnDefinition Width="44" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="44" />
+                        <ColumnDefinition Width="44" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="NShuffle" Style="{StaticResource TransportButton}" Width="40" Height="36" CornerRadius="18"
+                            Click="Shuffle_Click" AutomationProperties.Name="Перемешать">
+                        <FontIcon x:Name="NShuffleIcon" Glyph="&#xE8B1;" FontSize="15" />
+                    </Button>
+                    <TextBlock x:Name="NPos" Grid.Column="1" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,8,0"
+                               Foreground="{StaticResource GroovePlayerSecondary}" />
+                    <c:GrooveSlider x:Name="NSeek" Grid.Column="2" />
+                    <TextBlock x:Name="NDur" Grid.Column="3" FontSize="12" VerticalAlignment="Center" Margin="8,0,0,0"
+                               Foreground="{StaticResource GroovePlayerSecondary}" />
+                    <Button x:Name="NRepeat" Grid.Column="4" Style="{StaticResource TransportButton}" Width="40" Height="36" CornerRadius="18"
+                            Click="Repeat_Click" AutomationProperties.Name="Повтор">
+                        <FontIcon x:Name="NRepeatIcon" Glyph="&#xE8EE;" FontSize="15" />
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="NNowInfo" Background="Transparent" Tapped="NowInfo_Tapped">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Background="#33000000">
+                            <FontIcon Glyph="&#xE8D6;" FontSize="22" Opacity="0.5" Foreground="{StaticResource GroovePlayerForeground}" />
+                            <Image x:Name="NCover" Stretch="UniformToFill" />
+                        </Grid>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,8,2">
+                            <TextBlock x:Name="NTitle" FontSize="15" Foreground="{StaticResource GroovePlayerForeground}" TextTrimming="CharacterEllipsis" />
+                            <TextBlock x:Name="NArtist" FontSize="13" Margin="0,2,0,0" Foreground="{StaticResource GroovePlayerSecondary}" TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button x:Name="NPrev" Style="{StaticResource TransportButton}" Width="44" Height="44" CornerRadius="22"
+                                Click="Prev_Click" AutomationProperties.Name="Назад">
+                            <FontIcon Glyph="&#xE892;" FontSize="19" />
+                        </Button>
+                        <Button x:Name="NPlay" Style="{StaticResource TransportButton}" Width="48" Height="48" CornerRadius="24"
+                                Margin="2,0" BorderThickness="1" BorderBrush="{ThemeResource PlayRing}" Click="Play_Click"
+                                AutomationProperties.Name="Воспроизвести">
+                            <FontIcon x:Name="NPlayIcon" Glyph="&#xE768;" FontSize="22" Margin="3,0,0,0" />
+                        </Button>
+                        <Button x:Name="NNext" Style="{StaticResource TransportButton}" Width="44" Height="44" CornerRadius="22"
+                                Click="Next_Click" AutomationProperties.Name="Далее">
+                            <FontIcon Glyph="&#xE893;" FontSize="19" />
+                        </Button>
+                        <Button x:Name="NVolumeButton" Style="{StaticResource TransportButton}" Width="44" Height="44" CornerRadius="22"
+                                Margin="0,0,4,0" AutomationProperties.Name="Громкость">
+                            <FontIcon x:Name="NVolumeIcon" Glyph="&#xE767;" FontSize="17" />
+                            <Button.Flyout>
+                                <Flyout Placement="Top">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <Button x:Name="NMute" Style="{StaticResource IconButton}" Click="Mute_Click" AutomationProperties.Name="Без звука">
+                                            <FontIcon x:Name="NMuteIcon" Glyph="&#xE767;" FontSize="18" />
+                                        </Button>
+                                        <c:GrooveSlider x:Name="NVolume" Width="200" Height="44" VerticalAlignment="Center" />
+                                        <TextBlock x:Name="NVolumeText" Width="32" VerticalAlignment="Center" FontSize="15" />
+                                    </StackPanel>
+                                </Flyout>
+                            </Button.Flyout>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

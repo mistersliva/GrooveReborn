@@ -1,0 +1,32 @@
+<Project Sdk="Uno.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net10.0-android</TargetFrameworks>
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <RootNamespace>Reborn</RootNamespace>
+    <AssemblyName>RebornMusic</AssemblyName>
+    <ApplicationTitle>Reborn Music</ApplicationTitle>
+    <ApplicationId>com.reborn.music</ApplicationId>
+    <ApplicationDisplayVersion>0.1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationPublisher>Reborn</ApplicationPublisher>
+    <Description>Reborn Music: локальный музыкальный плеер в стиле Groove Music.</Description>
+
+    <!-- Android 10+: MediaStore thumbnails (ContentResolver.LoadThumbnail) need API 29 -->
+    <SupportedOSPlatformVersion>29.0</SupportedOSPlatformVersion>
+    <RuntimeIdentifiers>android-arm64</RuntimeIdentifiers>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+
+    <UnoFeatures>
+      Skia;
+    </UnoFeatures>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- Sideloadable release APK signed with the default debug keystore -->
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <RunAOTCompilation>false</RunAOTCompilation>
+  </PropertyGroup>
+</Project>

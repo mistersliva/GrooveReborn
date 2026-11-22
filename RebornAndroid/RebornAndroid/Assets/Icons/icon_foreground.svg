@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- Reborn Music: a disc with an eighth note, drawn for this project. -->
+<svg width="450" height="450" viewBox="0 0 450 450" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="225" cy="225" r="120" fill="none" stroke="#FFFFFF" stroke-width="14" />
+  <path fill="#FFFFFF" d="M212,150h62v30h-40v84a30,30 0 1 1 -22,-29z" />
+</svg>

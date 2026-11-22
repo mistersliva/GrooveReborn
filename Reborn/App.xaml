@@ -1,0 +1,333 @@
+<Application
+    x:Class="Reborn.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- NOTE: ThemeDictionaries must stay right after MergedDictionaries,
+                 otherwise the WinUI XAML compiler crashes with exit code 1 and no message. -->
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="ContentBackground" Color="#FF000000" />
+                    <SolidColorBrush x:Key="PaneTint" Color="#00000000" />
+                    <SolidColorBrush x:Key="SearchBoxBackground" Color="#73000000" />
+                    <SolidColorBrush x:Key="PaneSeparator" Color="#FF3E3E3E" />
+                    <SolidColorBrush x:Key="ContentSeparator" Color="#FF333333" />
+                    <SolidColorBrush x:Key="RowStripe" Color="#FF191919" />
+                    <SolidColorBrush x:Key="TilePlaceholder" Color="#FF2B2B2B" />
+                    <SolidColorBrush x:Key="BareHover" Color="#1AFFFFFF" />
+                    <SolidColorBrush x:Key="BarePressed" Color="#33FFFFFF" />
+                    <SolidColorBrush x:Key="PlayRing" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="Win10AccentBrush" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="Win10AccentTextBrush" Color="{ThemeResource SystemAccentColorLight2}" />
+
+                    <!-- Windows 10 text greys are darker than Windows 11's -->
+                    <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="#4DFFFFFF" />
+
+                    <SolidColorBrush x:Key="ButtonBackground" Color="#33FFFFFF" />
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#33FFFFFF" />
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="ButtonBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="Transparent" />
+                    <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AccentControlElevationBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AccentButtonBackground" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}" />
+                    <SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver" Color="#66FFFFFF" />
+                    <SolidColorBrush x:Key="AccentButtonForeground" Color="White" />
+                    <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="White" />
+                    <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="White" />
+
+                    <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="#1AFFFFFF" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="#33FFFFFF" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
+                    <SolidColorBrush x:Key="GridViewItemBackgroundPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="GridViewItemBackgroundPressed" Color="Transparent" />
+
+                    <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="White" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#66FFFFFF" />
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ContentBackground" Color="#FFFFFFFF" />
+                    <SolidColorBrush x:Key="PaneTint" Color="#00FFFFFF" />
+                    <SolidColorBrush x:Key="SearchBoxBackground" Color="#99FFFFFF" />
+                    <SolidColorBrush x:Key="PaneSeparator" Color="#FFCCCCCC" />
+                    <SolidColorBrush x:Key="ContentSeparator" Color="#FFDDDDDD" />
+                    <SolidColorBrush x:Key="RowStripe" Color="#FFF2F2F2" />
+                    <SolidColorBrush x:Key="TilePlaceholder" Color="#FFE6E6E6" />
+                    <SolidColorBrush x:Key="BareHover" Color="#1A000000" />
+                    <SolidColorBrush x:Key="BarePressed" Color="#33000000" />
+                    <SolidColorBrush x:Key="PlayRing" Color="#66000000" />
+                    <SolidColorBrush x:Key="Win10AccentBrush" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="Win10AccentTextBrush" Color="{ThemeResource SystemAccentColorDark1}" />
+
+                    <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#99000000" />
+                    <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="#66000000" />
+                    <SolidColorBrush x:Key="TextFillColorDisabledBrush" Color="#4D000000" />
+
+                    <SolidColorBrush x:Key="ButtonBackground" Color="#33000000" />
+                    <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#33000000" />
+                    <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#66000000" />
+                    <SolidColorBrush x:Key="ButtonBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#66000000" />
+                    <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="Transparent" />
+                    <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AccentControlElevationBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="AccentButtonBackground" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPointerOver" Color="{ThemeResource SystemAccentColor}" />
+                    <SolidColorBrush x:Key="AccentButtonBackgroundPressed" Color="{ThemeResource SystemAccentColorDark1}" />
+                    <SolidColorBrush x:Key="AccentButtonBorderBrushPointerOver" Color="#66000000" />
+                    <SolidColorBrush x:Key="AccentButtonForeground" Color="White" />
+                    <SolidColorBrush x:Key="AccentButtonForegroundPointerOver" Color="White" />
+                    <SolidColorBrush x:Key="AccentButtonForegroundPressed" Color="White" />
+
+                    <SolidColorBrush x:Key="ListViewItemBackgroundPointerOver" Color="#1A000000" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundPressed" Color="#33000000" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelected" Color="{ThemeResource SystemAccentColor}" Opacity="0.4" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPointerOver" Color="{ThemeResource SystemAccentColor}" Opacity="0.6" />
+                    <SolidColorBrush x:Key="ListViewItemBackgroundSelectedPressed" Color="{ThemeResource SystemAccentColor}" Opacity="0.7" />
+                    <SolidColorBrush x:Key="GridViewItemBackgroundPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="GridViewItemBackgroundPressed" Color="Transparent" />
+
+                    <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
+                    <SolidColorBrush x:Key="TextControlForegroundFocused" Color="Black" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="#99000000" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="#99000000" />
+                    <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="#66000000" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <!-- Accent-derived brushes; colours are recomputed in code from the Windows accent (Accent.cs). -->
+            <SolidColorBrush x:Key="GrooveAccent" Color="#FF0078D7" />
+            <SolidColorBrush x:Key="GrooveAccentText" Color="#FF99EBFF" />
+            <SolidColorBrush x:Key="GroovePlayerBar" Color="#FF1A2A3A" />
+            <SolidColorBrush x:Key="GroovePlayerTrack" Color="#40FFFFFF" />
+            <SolidColorBrush x:Key="GroovePlayerForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="GroovePlayerSecondary" Color="#B3FFFFFF" />
+
+            <!-- Windows 10 basics -->
+            <FontFamily x:Key="ContentControlThemeFontFamily">Segoe UI</FontFamily>
+            <FontFamily x:Key="SymbolThemeFontFamily">Segoe MDL2 Assets</FontFamily>
+            <x:Double x:Key="ControlContentThemeFontSize">15</x:Double>
+            <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+            <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+            <CornerRadius x:Key="ListViewItemCornerRadius">0</CornerRadius>
+            <CornerRadius x:Key="GridViewItemCornerRadius">0</CornerRadius>
+            <x:Boolean x:Key="ListViewItemSelectionIndicatorVisualEnabled">False</x:Boolean>
+            <Thickness x:Key="TextControlBorderThemeThickness">0</Thickness>
+            <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+            </Style>
+
+            <!-- Chrome-free button: flat hover/pressed overlay, corner radius taken from the button -->
+            <Style x:Key="BareButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="UseSystemFocusVisuals" Value="True" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="Overlay.Opacity" Value="1" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="Overlay.Opacity" Value="1" />
+                                                <Setter Target="Overlay.Background" Value="{ThemeResource BarePressed}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                            <VisualState.Setters>
+                                                <Setter Target="Presenter.Opacity" Value="0.35" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Border x:Name="Overlay" Background="{ThemeResource BareHover}" Opacity="0"
+                                        CornerRadius="{TemplateBinding CornerRadius}" />
+                                <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="{TemplateBinding CornerRadius}" />
+                                <ContentPresenter x:Name="Presenter" Content="{TemplateBinding Content}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Foreground="{TemplateBinding Foreground}"
+                                                  Padding="{TemplateBinding Padding}"
+                                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="IconButton" TargetType="Button" BasedOn="{StaticResource BareButton}">
+                <Setter Property="Width" Value="40" />
+                <Setter Property="Height" Value="40" />
+            </Style>
+
+            <Style x:Key="TransportButton" TargetType="Button" BasedOn="{StaticResource BareButton}">
+                <Setter Property="Width" Value="48" />
+                <Setter Property="Height" Value="48" />
+                <Setter Property="CornerRadius" Value="24" />
+                <Setter Property="Foreground" Value="{StaticResource GroovePlayerForeground}" />
+            </Style>
+
+            <Style x:Key="CaptionButton" TargetType="Button" BasedOn="{StaticResource BareButton}">
+                <Setter Property="Width" Value="46" />
+                <Setter Property="Height" Value="32" />
+                <Setter Property="IsTabStop" Value="False" />
+            </Style>
+
+            <!-- Left-pane row: 50px high, icon column 48px, text 15px -->
+            <Style x:Key="PaneItem" TargetType="Button" BasedOn="{StaticResource BareButton}">
+                <Setter Property="Height" Value="50" />
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            </Style>
+
+            <Style x:Key="LinkButton" TargetType="Button" BasedOn="{StaticResource BareButton}">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="0,4" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="Presenter.Opacity" Value="0.7" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="Presenter.Opacity" Value="0.5" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="Presenter" Content="{TemplateBinding Content}"
+                                                  Foreground="{TemplateBinding Foreground}" Padding="{TemplateBinding Padding}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="PageHeader" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="34" />
+                <Setter Property="FontWeight" Value="SemiLight" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            </Style>
+
+            <Style x:Key="SecondaryText" TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="Foreground" Value="{ThemeResource TextFillColorSecondaryBrush}" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            </Style>
+
+            <Style x:Key="StretchListItem" TargetType="ListViewItem" BasedOn="{StaticResource DefaultListViewItemStyle}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="Padding" Value="12,0,12,0" />
+                <Setter Property="MinHeight" Value="48" />
+            </Style>
+
+            <!-- Groove pivot header: 20px, grey; selected is white with an accent underline under the text -->
+            <Style x:Key="PivotTab" TargetType="ToggleButton">
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Margin" Value="0,0,42,0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid Background="Transparent">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="Label.Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="Label.Foreground" Value="{ThemeResource TextFillColorTertiaryBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Checked">
+                                            <VisualState.Setters>
+                                                <Setter Target="Label.Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                                <Setter Target="Pipe.Visibility" Value="Visible" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="Label.Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                                <Setter Target="Pipe.Visibility" Value="Visible" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="CheckedPressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="Label.Foreground" Value="{ThemeResource TextFillColorPrimaryBrush}" />
+                                                <Setter Target="Pipe.Visibility" Value="Visible" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter x:Name="Label" Content="{TemplateBinding Content}"
+                                                  Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                                  Margin="2,4,2,9" />
+                                <Rectangle x:Name="Pipe" Height="2" VerticalAlignment="Bottom" Visibility="Collapsed"
+                                           Fill="{StaticResource GrooveAccentText}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
